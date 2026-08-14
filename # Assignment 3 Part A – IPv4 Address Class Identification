@@ -1,0 +1,56 @@
+#include <iostream>
+#include <sstream>
+#include <string>
+using namespace std;
+int main() {
+    string ip;
+    cout << "Enter an IP address (format: x.x.x.x): ";
+    cin >> ip;
+    stringstream ss(ip);
+    string octet;
+    int firstOctet;
+    getline(ss, octet, '.');
+    firstOctet = stoi(octet);
+    cout << endl;
+    cout << "--- Results ---" << endl;
+    cout << "IP Address       : " << ip << endl;
+    if (firstOctet >= 1 && firstOctet <= 126) {
+        cout << "Class            : A" << endl;
+        cout << "Subnet Mask      : 255.0.0.0" << endl;
+        cout << "No. of Networks  : 2^7 (128 possible networks)" << endl;
+        cout << "Usable Hosts     : 2^24 - 2 (16,777,214)" << endl;
+        cout << "Starting IP      : " << firstOctet << ".0.0.0" << endl;
+        cout << "Last IP          : " << firstOctet << ".255.255.255" << endl}
+    else if (firstOctet == 127) {
+        cout << "Class            : Reserved / Loopback" << endl;
+        cout << "127.x.x.x is used for troubleshooting." << endl;}
+    else if (firstOctet >= 128 && firstOctet <= 191) {
+        cout << "Class            : B" << endl;
+        cout << "Subnet Mask      : 255.255.0.0" << endl;
+        cout << "No. of Networks  : 2^14 (16,384 possible networks)" << endl;
+        cout << "Usable Hosts     : 2^16 - 2 (65,534)" << endl;
+        cout << "Starting IP      : " << firstOctet << ".0.0.0" << endl;
+        cout << "Last IP          : " << firstOctet << ".255.255.255" << endl;}
+    else if (firstOctet >= 192 && firstOctet <= 223) {
+        cout << "Class            : C" << endl;
+        cout << "Subnet Mask      : 255.255.255.0" << endl;
+        cout << "No. of Networks  : 2^21 (2,097,152 possible networks)" << endl;
+        cout << "Usable Hosts     : 2^8 - 2 (254)" << endl;
+        cout << "Starting IP      : " << firstOctet << ".0.0.0" << endl;
+        cout << "Last IP          : " << firstOctet << ".255.255.255" << endl;}
+    else if (firstOctet >= 224 && firstOctet <= 239) {
+        cout << "Class            : D (Multicast)" << endl;
+        cout << "Subnet Mask      : Not applicable" << endl;
+        cout << "No. of Networks  : Not applicable" << endl;
+        cout << "Usable Hosts     : Not applicable" << endl;
+        cout << "Starting IP      : " << firstOctet << ".0.0.0" << endl;
+        cout << "Last IP          : " << firstOctet << ".255.255.255" << endl;}
+    else if (firstOctet >= 240 && firstOctet <= 255) {
+        cout << "Class            : E (Experimental)" << endl;
+        cout << "Subnet Mask      : Not applicable" << endl;
+        cout << "No. of Networks  : Not applicable" << endl;
+        cout << "Usable Hosts     : Not applicable" << endl;
+        cout << "Starting IP      : " << firstOctet << ".0.0.0" << endl;
+        cout << "Last IP          : " << firstOctet << ".255.255.255" << endl;}
+    else {cout << "Invalid IP address." << endl;}
+    return 0;}
